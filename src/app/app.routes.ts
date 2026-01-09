@@ -15,6 +15,18 @@ export const routes: Routes = [
   { path: 'register', component: RegisterPage },
   { path: 'dashboard/home-page', component: HomePage },
   {
+    path: 'dashboard/my-routes',
+    loadComponent: () => import('./dashboard/pages/my-routes/my-routes.component').then(m => m.MyRoutesComponent)
+  },
+  {
+    path: 'dashboard/profile',
+    loadComponent: () => import('./dashboard/pages/profile-page/profile-page').then(m => m.ProfilePage)
+  },
+  {
+    path: 'dashboard/live-navigation/:id',
+    loadComponent: () => import('./shared/components/live-navigation.component').then(m => m.LiveNavigationComponent)
+  },
+  {
     path: 'admin',
     component: AdminLayout,
     children: [
@@ -25,6 +37,10 @@ export const routes: Routes = [
       { path: 'transactions', component: TransactionsPage },
       { path: 'settings', component: SettingsPage },
     ],
+  },
+  {
+    path: 'shop',
+    loadChildren: () => import('./shop/shop.routes').then(m => m.SHOP_ROUTES)
   },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: '**', redirectTo: '/login' },

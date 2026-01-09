@@ -67,4 +67,20 @@ export class StoreService {
       throw error;
     }
   }
+
+  async getStoresWithLocation(): Promise<Store[]> {
+    const { data, error } = await this.supabase
+      .from('stores')
+      .select(STORE_SELECT)
+      .eq('status', 'aprobado')
+      .not('location', 'is', null)
+      .order('created_at', { ascending: false });
+
+    if (error) {
+      console.error('Error fetching stores with location:', error);
+      throw error;
+    }
+
+    return (data ?? []) as Store[];
+  }
 }

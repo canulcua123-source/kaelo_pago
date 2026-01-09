@@ -16,6 +16,9 @@ export interface RouteSummary {
   price: number;
   status: RouteStatus;
   creator_id: string;
+  estimated_time_hours?: number;
+  elevation_gain_m?: number;
+  route_geometry?: any; // PostGIS geometry type
   created_at?: string;
   updated_at?: string;
   creator?: {
